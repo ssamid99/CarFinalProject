@@ -20,8 +20,9 @@ namespace ConsoleApp.CarsFinalProject
 
          readMenu:
              PrintMenu();
-
+            
             Menu carsys = ScanerManager.ReadMenu("Menyudan seçin: ");
+
 
             switch (carsys)
             {
@@ -100,13 +101,38 @@ namespace ConsoleApp.CarsFinalProject
                     c.Price = ScanerManager.ReadDouble("Avtomobil Qiymətini Daxil Edin:");
                     c.Color = ScanerManager.ReadString("Avtomobil Rəngili Daxil Edin:");
                     c.Engine = ScanerManager.ReadDouble("Avtomobil Mühərrikini Daxil Edin:");
+
+                    PrintFuelMenu();
+                    FuelTypes numFuel = ScanerManager.ReadFuel("Yanacaq növünü seçin...!");
+                    
+                    switch (numFuel)
+                    {
+                        case FuelTypes.Benzin:
+                            c.FuelTypes = nameof(FuelTypes.Benzin);
+                            break;
+                        case FuelTypes.Gas:
+                            c.FuelTypes = nameof(FuelTypes.Gas);
+                            break;
+                        case FuelTypes.Diesel:
+                            c.FuelTypes = nameof(FuelTypes.Diesel);
+                            break;
+                        case FuelTypes.Hybrid:
+                            c.FuelTypes = nameof(FuelTypes.Hybrid);
+                            break;
+                        case FuelTypes.Electric:
+                            c.FuelTypes = nameof(FuelTypes.Electric);
+                            break;
+                        default:
+                            break;
+                    }
+                    
                     carMgr.Add(c);
                     goto case Menu.CarAll;
                 case Menu.CarEdit:
                     Console.Clear();
                     ShowAllCars(carMgr);
                     Console.WriteLine("Avtomobil Nº deyishmek ucun => 1 | Ilini deyishmek ucun => 2 | Qiyməti dəyişmək ucun => 3" +
-                        "Rəngini dəyişmək üçün => 4 | Mühərrik həcmini dəyişmək üçün => 5");
+                        "Rəngini dəyişmək üçün => 4 | Mühərrik həcmini dəyişmək üçün => 5 | Yanacaq növünü dəyişmək üçün => 6");
                     bool s1 = int.TryParse(Console.ReadLine(), out int menuNums);
                     if (s1 && menuNums == 1)
                     {
@@ -132,6 +158,11 @@ namespace ConsoleApp.CarsFinalProject
                     {
                         int value3 = ScanerManager.ReadInteger("Secilmish Avtomobilin Nº daxil edin: ");
                         carMgr.EditEngine(value3);
+                    }
+                    if(s1 && menuNums == 6)
+                    {
+                        int value3 = ScanerManager.ReadInteger("Secilmish Avtomobilin Nº daxil edin: ");
+                        carMgr.EditFuel(value3);
                     }
                     goto case Menu.CarAll;
                 case Menu.CarRemove:
@@ -166,6 +197,18 @@ namespace ConsoleApp.CarsFinalProject
             Console.WriteLine("Cixmaq Ucun Her Hansi Bir Duymeni Sixin");
             Console.ReadKey();
         }
+        static void PrintFuelMenu()
+        {
+            Console.WriteLine(new string('-', Console.WindowWidth));
+
+            foreach (var item in Enum.GetNames(typeof(FuelTypes)))
+            {
+                FuelTypes numFuel = (FuelTypes)Enum.Parse(typeof(FuelTypes), item);
+                Console.WriteLine($"{((byte)numFuel).ToString().PadLeft(2)}. {item}");
+            }
+            Console.WriteLine($"{new string('-', Console.WindowWidth)}");
+        }
+
         static void PrintMenu()
         {
             Console.WriteLine(new string('-', Console.WindowWidth));

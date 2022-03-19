@@ -80,6 +80,37 @@ namespace ConsoleApp.CarsFinalProject.Managers
                 }
             }
         }
+        public void EditFuel(int value)
+        {
+            for (int i = 0; i < data.Length; i++)
+            {
+                Console.WriteLine("Yanacaq növünü dəyişin...!");
+                FuelTypes numFuel = ScanerManager.ReadFuel("Yanacaq növünü seçin...!");
+                if (data[i].CarId == value)
+                {
+                    switch (numFuel)
+                    {
+                        case FuelTypes.Benzin:
+                            data[i].FuelTypes = nameof(FuelTypes.Benzin);
+                            break;
+                        case FuelTypes.Gas:
+                            data[i].FuelTypes = nameof(FuelTypes.Gas);
+                            break;
+                        case FuelTypes.Diesel:
+                            data[i].FuelTypes = nameof(FuelTypes.Diesel);
+                            break;
+                        case FuelTypes.Hybrid:
+                            data[i].FuelTypes = nameof(FuelTypes.Hybrid);
+                            break;
+                        case FuelTypes.Electric:
+                            data[i].FuelTypes = nameof(FuelTypes.Electric);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
         public void SingleCar(int value)
         {
             string singleCar = "";
@@ -88,7 +119,7 @@ namespace ConsoleApp.CarsFinalProject.Managers
                 if (data[i].CarId == value)
                 {
                     singleCar = $"Avtomobil Nº: {data[i].CarId} | Avtomobil Ili: {data[i].Year} | Avtomobil Qiyməti: {data[i].Price}" +
-                        $"Avtomobil Rəngi: {data[i].Color} | Avtomobil Mühərrik həcmi: {data[i].Engine}";
+                        $"Avtomobil Rəngi: {data[i].Color} | Avtomobil Mühərrik həcmi: {data[i].Engine} | Avtomobil Yanacaq növü: {data[i].FuelTypes}";
                     break;
                 }
             }

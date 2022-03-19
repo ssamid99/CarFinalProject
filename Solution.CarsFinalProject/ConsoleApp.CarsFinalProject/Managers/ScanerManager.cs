@@ -15,6 +15,7 @@ namespace ConsoleApp.CarsFinalProject
             l1:
             Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.Write(caption);
+            Console.Beep(1000,300);
             if(!int.TryParse(Console.ReadLine(), out int value))
             {
                 PrintError("Düzgün Məlumat Deyil,Yenidən Cəhd Edin");
@@ -28,7 +29,8 @@ namespace ConsoleApp.CarsFinalProject
             l2:
             Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.Write(caption);
-            if(!double.TryParse(Console.ReadLine(), out double value))
+            Console.Beep(1000, 300);
+            if (!double.TryParse(Console.ReadLine(), out double value))
             {
                 PrintError("Düzgün Məlumat Deyil,Yenidən Cəhd Edin");
                 goto l2;
@@ -39,8 +41,9 @@ namespace ConsoleApp.CarsFinalProject
         public static string ReadString(string caption)
         {
             l3:
-            Console.Write(caption);
             Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.Write(caption);
+            Console.Beep(1000, 300);
             string value = Console.ReadLine();
             if (string.IsNullOrWhiteSpace(value))
             {
@@ -56,6 +59,7 @@ namespace ConsoleApp.CarsFinalProject
         l1:
             Console.ForegroundColor = ConsoleColor.DarkGreen;            
             Console.Write($"{caption} [yyyy]");
+            Console.Beep(1000, 300);
             if (!DateTime.TryParseExact(Console.ReadLine(), "yyyy", null, DateTimeStyles.None, out DateTime value))
             {
                 PrintError("Düzgün Məlumat Deyil,Yenidən Cəhd Edin");
@@ -67,8 +71,9 @@ namespace ConsoleApp.CarsFinalProject
         public static Menu ReadMenu(string caption)
         {
         l1:
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.Write(caption);
-
+            Console.Beep(1000, 300);
             if (!Enum.TryParse(Console.ReadLine(), out Menu m))
             {
                 PrintError("Menudan Secin");
@@ -79,9 +84,25 @@ namespace ConsoleApp.CarsFinalProject
         }
         public static void PrintError(string message)
         {
-            Console.ForegroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.WriteLine(message);
+            Console.Beep(14000, 1000); 
             Console.ResetColor();
+            
+        }
+        public static FuelTypes ReadFuel(string caption)
+        {
+        l1:
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write(caption);
+            Console.Beep(1000, 300);
+            if (!Enum.TryParse(Console.ReadLine(), out FuelTypes m))
+            {
+                PrintError("Yeniden Secin");
+                goto l1;
+            }
+            Console.ResetColor();
+            return m;
         }
     }
 }

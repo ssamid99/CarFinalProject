@@ -18,19 +18,19 @@ namespace ConsoleApp.CarsFinalProject
         public double Price { get; set; }
         public string Color { get; set; }
         public double Engine { get; set; }
-        //FuelTypes m = new FuelTypes();
+        public string FuelTypes { get; set; }
         public override string ToString()
         {
             return $"Model Nº: {ModelId} | Marka adi: {BrandName} | Model adi: {ModelName} | Avtomobil Nº: {CarId} | Buraxiliş Ili: {Year} | " +
-                $"Qiyməti: {Price} | Mühərrik həcmi: {Engine} ";
+                $"Qiyməti: {Price} | Mühərrik həcmi: {Engine} | Yanacaq növü: {FuelTypes}";
         }
     }
-    //enum FuelTypes:byte
-    //{
-    //    Benzin = 1,
-    //    Gas,
-    //    Diesel,
-    //    Hybrid,
-    //    Electric
-    //}
+    enum FuelTypes : byte
+    {
+        Benzin = 1,
+        Gas,
+        Diesel,
+        Hybrid,
+        Electric
+    }
 }
